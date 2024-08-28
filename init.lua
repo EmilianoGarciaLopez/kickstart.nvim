@@ -788,14 +788,14 @@ require('lazy').setup({
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
     'projekt0n/github-nvim-theme',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    init = function()
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
+    priority = 1000,
+    config = function()
+      require('github-theme').setup {
+        options = {
+          transparent = true,
+        },
+      }
       vim.cmd.colorscheme 'github_dark_default'
-
-      -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
     end,
   },
@@ -869,6 +869,27 @@ require('lazy').setup({
       --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
       --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     end,
+  },
+
+  {
+    'yetone/avante.nvim',
+    event = 'VeryLazy',
+    opts = {
+      -- add any opts here
+    },
+    dependencies = {
+      'stevearc/dressing.nvim',
+      'nvim-lua/plenary.nvim',
+      'MunifTanjim/nui.nvim',
+      --- The below is optional, make sure to setup it properly if you have lazy=true
+      {
+        'MeanderingProgrammer/render-markdown.nvim',
+        opts = {
+          file_types = { 'markdown', 'Avante' },
+        },
+        ft = { 'markdown', 'Avante' },
+      },
+    },
   },
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
